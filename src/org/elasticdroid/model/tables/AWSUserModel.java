@@ -1,11 +1,11 @@
-package org.elasticdroid.db.tables;
+package org.elasticdroid.model.tables;
 
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
 @DatabaseTable(tableName = "AWSUserTable")
 @SuppressWarnings("unused")
-public class AWSUserTable {
+public class AWSUserModel {
 	
 	public static final String TBL_NAME = "AWSUserTable";
 	
@@ -46,7 +46,7 @@ public class AWSUserTable {
 		return awsUsername == null || awsAccessKey == null || awsSecretAccessKey == null;
 	}
 
-	public AWSUserTable() {
+	public AWSUserModel() {
 		
 	}
 }

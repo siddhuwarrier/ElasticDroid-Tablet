@@ -96,6 +96,8 @@ public class ChartFragment extends Fragment {
 	    renderer.setChartTitleTextSize(20);
 	    renderer.setLabelsTextSize(15);
 	    renderer.setLegendTextSize(15);
+	    renderer.setRange(new double[]{0, 6, 0, 6});
+	    
 	    //renderer.setMargins(new int[] { 20, 30, 15, 0 });
 	    XYSeriesRenderer newTicketRenderer = new XYSeriesRenderer();
 	    newTicketRenderer.setColor(Color.BLUE);
@@ -104,8 +106,8 @@ public class ChartFragment extends Fragment {
 	    fixedTicketRenderer.setColor(Color.GREEN);
 	    renderer.addSeriesRenderer(fixedTicketRenderer);
 
-	    //renderer.setXLabels(7);
-	    //renderer.setYLabels(7);
+	    renderer.setXLabels(0);
+	    renderer.setYLabels(0);
 	    renderer.setDisplayChartValues(false);
 	    renderer.setShowGrid(false);
 	    

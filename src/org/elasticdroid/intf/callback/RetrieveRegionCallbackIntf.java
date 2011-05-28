@@ -4,5 +4,5 @@ import java.util.Map;
 
 public interface RetrieveRegionCallbackIntf extends GenericCallbackIntf {
 	
-	public void regionsRetrieved(Map<String, String> regions);
+	public void regionsRetrieved(Map<String, String[]> regions);
 }

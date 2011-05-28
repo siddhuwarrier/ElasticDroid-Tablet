@@ -70,24 +70,6 @@ public abstract class GenericTask<T, U, V, W extends GenericCallbackIntf> extend
     }
 
     /**
-     * Set the activity object referred to by the model. This is used by the
-     * activity to reset itself to null when it is being destroyed temporarily
-     * (for instance whenever the screen orientation is changed), and to reset
-     * it whenever the object is restored after being destroyed.
-     * 
-     * @param activity
-     *            the GenericActivity referred to in the Model
-     */
-    public void setActivity(Activity activity) {
-    }
-
-    /**
-     * Method to set the activity to null. Called when activity is destroyed.
-     */
-    public void setActivityNull() {
-    }
-
-    /**
      * Set the callback object referred to by the model. This is used by the
      * activity to reset itself to null when it is being destroyed temporarily
      * (for instance whenever the screen orientation is changed), and to reset

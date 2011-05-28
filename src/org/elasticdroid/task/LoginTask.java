@@ -18,9 +18,9 @@
  */
 package org.elasticdroid.task;
 
-import org.elasticdroid.db.tables.AWSUserTable;
 import org.elasticdroid.intf.callback.LoginCallbackIntf;
 import org.elasticdroid.model.LoginReturnModel;
+import org.elasticdroid.model.tables.AWSUserModel;
 import org.elasticdroid.utils.AWSResultConstants;
 
 import android.content.Context;
@@ -43,14 +43,14 @@ import com.amazonaws.services.identitymanagement.AmazonIdentityManagementClient;
  */
 public class LoginTask extends GenericTask<Void, Void, LoginReturnModel, LoginCallbackIntf> {
 	
-	private AWSUserTable awsUserTable;
+	private AWSUserModel awsUserTable;
 	
 	
 	/**
 	 * To call super Constructor alone. To read what this constructor
 	 * does, please refer to the superclass documentation.
 	 */
-	public LoginTask(Context context, LoginCallbackIntf callback, AWSUserTable awsUserTable) {
+	public LoginTask(Context context, LoginCallbackIntf callback, AWSUserModel awsUserTable) {
 		super(context, callback);
 		
 		this.awsUserTable = awsUserTable;
@@ -73,7 +73,7 @@ public class LoginTask extends GenericTask<Void, Void, LoginReturnModel, LoginCa
 	
 	public LoginReturnModel performLogin() {
 		LoginReturnModel returnModel = new LoginReturnModel();
-		returnModel.setResultConstants(AWSResultConstants.LOGIN_SUCCESS);
+		returnModel.setResultConstants(AWSResultConstants.OPERATION_SUCCESS);
 		
 		if (awsUserTable.isNull()) {
 			returnModel.setResultConstants(AWSResultConstants.INVALID_INPUT);
@@ -128,7 +128,7 @@ public class LoginTask extends GenericTask<Void, Void, LoginReturnModel, LoginCa
 		
 		switch (returnModel.getResultConstants()) {
 		
-		case LOGIN_SUCCESS:
+		case OPERATION_SUCCESS:
 			callback.loginSuccess();
 			break;
 			

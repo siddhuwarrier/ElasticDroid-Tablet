@@ -1,7 +1,7 @@
 package org.elasticdroid;
 
-import org.elasticdroid.db.tables.AWSUserTable;
 import org.elasticdroid.intf.callback.LoginCallbackIntf;
+import org.elasticdroid.model.tables.AWSUserModel;
 import org.elasticdroid.task.LoginTask;
 import org.elasticdroid.tpl.GenericActivity;
 import org.elasticdroid.utils.DialogConstants;
@@ -24,12 +24,12 @@ import com.amazonaws.AmazonServiceException;
 public class LoginView extends GenericActivity implements OnClickListener, LoginCallbackIntf {	
 	private LoginTask loginTask;
 	
-	private AWSUserTable userTable;
+	private AWSUserModel userTable;
 	
 	private static final String TAG = LoginView.class.getName();
 	
 	public LoginView() {
-		userTable = new AWSUserTable();
+		userTable = new AWSUserModel();
 	}
 	
     /**
@@ -50,10 +50,16 @@ public class LoginView extends GenericActivity implements OnClickListener, Login
             Log.v(TAG, "Reclaiming previous background task...");
 
             loginTask = (LoginTask) retained;
-            loginTask.setActivity(this);
             loginTask.setCallback(this);
         }
         
+        
+        //TODO MOVE TO LOGINSUCCESS
+        userTable = new AWSUserModel();
+        userTable.setAwsAccessKey("AKIAIFNZVN3SD3GFZ4UA");
+        userTable.setAwsSecretAccessKey("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");
+        userTable.setAwsUsername("ec2lab");
+        ((ElasticDroidApp) getApplication()).setAwsUserModel(userTable);
         Intent dashboardIntent = new Intent();
         dashboardIntent.setClassName("org.elasticdroid", "org.elasticdroid.EC2DashboardView");
         
@@ -83,7 +89,6 @@ public class LoginView extends GenericActivity implements OnClickListener, Login
 
             // set the activity in loginModel to null so that it does not call
             // the activity
-            loginTask.setActivityNull();
             loginTask.setCallback(null);
 
             return loginTask;
@@ -126,6 +131,9 @@ public class LoginView extends GenericActivity implements OnClickListener, Login
 		Log.d(TAG, "Login success!");
 		
 		//display dashboard
+		
+		//save AWS User Data
+		((ElasticDroidApp)getApplication()).setAwsUserModel(userTable);
 	}
 
 	public void awsClientException(AmazonClientException exception) {

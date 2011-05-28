@@ -3,26 +3,32 @@ package org.elasticdroid.fragments;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.elasticdroid.ElasticDroidApp;
 import org.elasticdroid.R;
+import org.elasticdroid.intf.callback.RetrieveRegionCallbackIntf;
 import org.elasticdroid.task.RetrieveRegionTask;
 
 import android.app.ListFragment;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import com.amazonaws.AmazonClientException;
+import com.amazonaws.AmazonServiceException;
+
 /**
  * A fragment showing the list of regions
  * @author siddhu.warrier
  *
  */
-public class RegionFragment extends ListFragment {
+public class RegionFragment extends ListFragment implements RetrieveRegionCallbackIntf {
 	/**
 	 * Reference to RetrieveRegionModel object
 	 */
@@ -31,8 +37,13 @@ public class RegionFragment extends ListFragment {
 	/** the available AWS regions */
 	private HashMap<String, String> regionData;
 	
-	/** The connectivity data */
-	private HashMap<String, String> connectionData;
+	private static final String TAG = RegionFragment.class.getName();
+	
+	@Override
+	public void onCreate(Bundle savedState) {
+		super.onCreate(savedState);
+		setRetainInstance(true);
+	}
 	
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -43,14 +54,10 @@ public class RegionFragment extends ListFragment {
 	/**
 	 * 
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		
-		Intent intent = getActivity().getIntent();
-		this.connectionData = (HashMap<String, String>) intent.getSerializableExtra("org.elasticdroid.LoginView.connectionData");
-		
+        
 		setListAdapter(new RegionsAdapter(
 				getActivity(), 
 				R.layout.regionrow, 
@@ -60,16 +67,37 @@ public class RegionFragment extends ListFragment {
 	@Override
 	public void onResume() {
 		super.onResume();
-		//check if we need to get region data.
-		//if we have neither region data, nor a running retrieveregionmodel
-		//execute retrieve region model
-		/*if (regionData == null) {
-			//execute retrieveregionmodel unless not executing already
-			if (retrieveRegionTask == null) {
-				retrieveRegionTask = new RetrieveRegionTask();
-				retrieveRegionTask.execute(new HashMap<?,?>[]{connectionData});
-			}
-		}*/
+		
+		if (retrieveRegionTask == null) {
+			Log.d(TAG, "Region data null. Start background processing...");
+			
+			retrieveRegionTask = new RetrieveRegionTask(
+					getActivity(),
+					this, 
+					((ElasticDroidApp) getActivity().getApplication()).getAwsUserModel());
+			
+			retrieveRegionTask.execute();
+		}
+	}
+
+	public void cleanUpAfterTaskExecution() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void awsClientException(AmazonClientException exception) {
+		// TODO Auto-generated method stub
+		Log.d(TAG, "Amazon Client Exception!");
+	}
+
+	public void awsServerException(AmazonServiceException exception) {
+		// TODO Auto-generated method stub
+		Log.d(TAG, "Amazon Service Exception!");
+	}
+
+	public void regionsRetrieved(Map<String, String[]> regions) {
+		// TODO Auto-generated method stub
+		Log.d(TAG, "Regions retrieved!");
 	}
 }
 
