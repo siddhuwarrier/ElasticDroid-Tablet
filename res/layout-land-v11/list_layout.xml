@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent" android:layout_height="fill_parent" android:orientation="vertical">
+
+	<ImageView android:id="@+id/ImageView01"
+		android:src="@drawable/logo"
+		android:paddingTop="6sp"
+		android:layout_width="fill_parent" android:layout_height="wrap_content"></ImageView>
+
+
+	<ListView android:id="@id/android:list" android:layout_width="match_parent"
+		android:layout_height="match_parent" android:layout_weight="1"
+		android:drawSelectorOnTop="false" />
+
+	<TextView android:id="@id/android:empty" android:layout_width="match_parent"
+		android:layout_height="match_parent" android:text="@string/no_data_available"
+		android:textSize="18sp" />
+</LinearLayout>

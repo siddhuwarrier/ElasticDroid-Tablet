@@ -1,12 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-      package="com.cloudreach"
-      android:versionCode="1"
-      android:versionName="1.0">
-
-
-    <application android:icon="@drawable/icon" android:label="@string/app_name">
-
-
+      package="org.elasticdroid"
+      android:versionCode="1" android:versionName="Annoying Aardvark">
+	
+	<uses-sdk android:minSdkVersion="11" />
+    <application 
+    	android:icon="@drawable/logo" 
+    	android:label="@string/app_name"
+    	android:hardwareAccelerated="true">
+    	
+    	<activity android:name="org.elasticdroid.LoginView" android:label="@string/app_name">
+			<intent-filter>
+				<action android:name="android.intent.action.MAIN"/>
+				<category android:name="android.intent.category.LAUNCHER" />
+			</intent-filter>
+		</activity>
+		
+    	<activity android:name="org.elasticdroid.EC2DashboardView" android:label="@string/ec2dashboardview_title">
+		</activity>
+		
     </application>
+	<uses-permission android:name="android.permission.INTERNET"></uses-permission>
 </manifest>

@@ -1,5 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="hello">Hello World!</string>
-    <string name="app_name">EC2ControlPanel</string>
+    <string name="about_titletext">About</string>
+    <string name="app_name">Elastic Droid Tablet Edition</string>
+    <string name="progressdialog_message">Please wait...</string>
+    <string name="no_data_available">No data available</string>
+    <string name="login_msg">Sign in to AWS</string>
+    <string name="aws_username">AWS Username</string>
+    <string name="aws_access_key">AWS Access Key</string>
+    <string name="aws_secret_access_key">AWS Secret Access Key</string>
+    <string name="login_button">Sign in</string>
+    <string name="loginview_switch_user">Switch User</string>
+    <string name="loginview_username_empty_err">Username cannot be empty</string>
+	<string name="loginview_accesskey_empty_err">Access key cannot be empty</string>
+	<string name="loginview_secretaccesskey_empty_err">Secret Access key cannot be empty</string>
+	<string name="loginview_invalid_credentials_err">Invalid credentials</string>
+	<string name="loginview_invalid_keys_dlg">Invalid Access and/or Secret Access key. Please re-enter your Access and/or Secret Access keys.</string>
+	<string name="loginview_server_err_dlg">AWS Server Error 5xx</string>
+	<string name="loginview_unexpected_err_dlg">Unexpected error:</string>
+	<string name="loginview_bug_report_dlg">Please file a bug report.</string>
+	<string name="loginview_no_connxn_dlg">Unable to connect to AWS. Are you connected to the Internet?</string>
+	
+	<string name="ec2dashboardview_title">EC2 Dashboard View</string>
+	<string name="regions_msg">Regions</string>
+	<string name="chart_msg">Dashboard</string>
 </resources>

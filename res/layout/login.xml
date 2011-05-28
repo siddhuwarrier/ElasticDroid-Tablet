@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+  
+ <LinearLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
+android:orientation="vertical"
+android:layout_width="fill_parent"
+android:layout_height="fill_parent"
+>
+ 	<TextView
+        android:id="@+id/loginTextView"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="61.25sp"
+        android:paddingLeft="80sp"
+        android:paddingTop="61.25sp"
+        android:paddingBottom = "36.75sp"
+        android:textColor="#E47911"
+        android:text="@string/login_msg"/>
+             
+	    <!--  Relative Layout for the input form -->
+		<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		    android:layout_width="fill_parent"
+		    android:layout_height="fill_parent">
+		    <TextView
+		        android:id="@+id/usernameTextView"
+		        android:layout_width="fill_parent"
+		        android:layout_height="wrap_content"
+		        android:textSize="24.5sp"
+		        android:paddingLeft="80sp"
+		        android:layout_marginBottom="12.25sp"
+		        android:text="@string/aws_username"/>
+		    <EditText
+		        android:id="@+id/usernameEntry"
+		        android:layout_width="640sp"
+		        android:layout_height="wrap_content"
+		       	android:textSize="24.5sp"
+		       	android:layout_marginLeft="80sp"
+		        android:layout_marginBottom="24.5sp"
+		        android:layout_below="@id/usernameTextView"/>
+		        
+		    <TextView
+		        android:id="@+id/akTextView"
+		        android:layout_marginTop="5sp"
+		        android:layout_width="fill_parent"
+		        android:layout_height="wrap_content"
+		        android:textSize="24.5sp"
+		        android:paddingLeft="80sp"
+		        android:layout_marginBottom="12.25sp"
+		        android:layout_below="@id/usernameEntry"
+		        android:text="@string/aws_access_key"/>
+		    <EditText
+		        android:id="@+id/akEntry"
+		        android:layout_width="640sp"
+		        android:layout_height="wrap_content"
+		        android:textSize="24.5sp"
+		        android:layout_marginLeft="80sp"
+		        android:layout_marginBottom="24.5sp"
+		        android:layout_below="@id/akTextView"/>
+		     
+		    <!--  Get the Secret Access Key -->
+		    <TextView
+		        android:id="@+id/sakTextView"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_marginTop="5sp"
+		        android:text="@string/aws_secret_access_key"
+		        android:textSize="24.5sp"
+		        android:paddingLeft="80sp"
+		        android:layout_marginBottom="12.25sp"
+		        android:layout_below="@id/akEntry"/>
+		    <EditText
+		        android:id="@+id/sakEntry"
+		        android:layout_width="640sp"
+		        android:layout_height="wrap_content"
+		        android:password="true"
+		        android:textSize="24.5sp"
+		        android:layout_marginLeft="80sp"
+		        android:layout_marginBottom="24.5sp"
+		        android:layout_below="@id/sakTextView"/>
+		        
+		    <!-- Buttons -->
+			<Button
+			  android:id="@+id/loginButton"
+			  android:layout_width="wrap_content"
+			  android:layout_height="wrap_content"
+			  android:textSize="24.5sp"
+			  android:layout_below="@id/sakEntry"
+			  android:layout_marginLeft="80sp"
+			  android:text="@string/login_button" />
+		</RelativeLayout>
+</LinearLayout>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+ 	android:layout_width="wrap_content"
+ 	android:layout_height="wrap_content"
+ 	android:stretchColumns="1"
+ 	
+ 	>    
+    
+    <TableRow>
+ 
+		<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		 android:layout_width="wrap_content"
+		 android:layout_height="wrap_content"
+		 android:layout_column="1"
+		 android:layout_marginBottom="24.5sp"
+		 android:orientation="vertical">
+		
+			 <TextView
+			 android:id="@+id/regionName"
+			 android:layout_width="wrap_content"
+			 android:layout_height="wrap_content"
+			 android:layout_gravity="center_vertical"
+			 android:textColor="#ffffff"
+			 android:textSize="24.5sp"
+			 android:paddingTop="2sp" 
+			 android:paddingBottom="2sp" 
+			 android:paddingLeft = "15sp"
+			 />
+		</LinearLayout>
+	</TableRow>
+</TableLayout>
+
