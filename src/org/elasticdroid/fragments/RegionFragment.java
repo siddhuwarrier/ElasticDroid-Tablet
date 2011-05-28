@@ -9,14 +9,17 @@ import org.elasticdroid.R;
 import org.elasticdroid.intf.callback.RetrieveRegionCallbackIntf;
 import org.elasticdroid.task.RetrieveRegionTask;
 
+import android.app.Activity;
 import android.app.ListFragment;
 import android.content.Context;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -39,11 +42,23 @@ public class RegionFragment extends ListFragment implements RetrieveRegionCallba
 	
 	private static final String TAG = RegionFragment.class.getName();
 	
+	private OnRegionSelectedListener activityListener;
+	
 	@Override
 	public void onCreate(Bundle savedState) {
 		super.onCreate(savedState);
 		setRetainInstance(true);
 	}
+	
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        try {
+            activityListener = (OnRegionSelectedListener) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString() + " must implement OnRegionSelectedListener");
+        }
+    }
 	
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -107,15 +122,20 @@ public class RegionFragment extends ListFragment implements RetrieveRegionCallba
 	}
 	
     @Override
-	public void onListItemClick(ListView l, View v, int position, long id) {
+	public void onListItemClick(ListView list, View containingView, int position, long id) {
     	int mapIdx = 0;
-    	for (String regionDatum : regionData.keySet()) {
+    	for (String regionApiName : regionData.keySet()) {
     		if (mapIdx == position) {
-    			Log.d(TAG, regionDatum + " selected.");
-
+    			Log.d(TAG, regionApiName + " selected.");
+    			((LinearLayout)(containingView.findViewById(R.id.regionLayout))).setBackgroundColor(0x93A7AC);
+    			activityListener.onRegionSelected(regionApiName, regionData.get(regionApiName)[1]);
     			break;
     		}
     	}
+    }
+    
+    public interface OnRegionSelectedListener {
+        public void onRegionSelected(String regionApiName, String regionEndpoint);
     }
 }
 

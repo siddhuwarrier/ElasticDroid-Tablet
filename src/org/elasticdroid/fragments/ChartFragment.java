@@ -2,6 +2,7 @@ package org.elasticdroid.fragments;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 
 import org.achartengine.ChartFactory;
 import org.achartengine.GraphicalView;
@@ -10,7 +11,12 @@ import org.achartengine.model.XYValueSeries;
 import org.achartengine.renderer.XYMultipleSeriesRenderer;
 import org.achartengine.renderer.XYSeriesRenderer;
 import org.elasticdroid.R;
+import org.elasticdroid.intf.callback.CloudwatchMonitoringCallbackIntf;
 import org.elasticdroid.task.RetrieveRegionTask;
+
+import com.amazonaws.AmazonClientException;
+import com.amazonaws.AmazonServiceException;
+import com.amazonaws.services.cloudwatch.model.Datapoint;
 
 import android.app.Fragment;
 import android.content.Intent;
@@ -27,7 +33,7 @@ import android.widget.LinearLayout;
  * @author siddhu.warrier
  *
  */
-public class ChartFragment extends Fragment {
+public class ChartFragment extends Fragment implements CloudwatchMonitoringCallbackIntf {
 	/**
 	 * Reference to RetrieveRegionModel object
 	 */
@@ -95,7 +101,6 @@ public class ChartFragment extends Fragment {
 	    renderer.setAxisTitleTextSize(16);
 	    renderer.setChartTitleTextSize(20);
 	    renderer.setLabelsTextSize(15);
-	    renderer.setLegendTextSize(15);
 	    renderer.setRange(new double[]{0, 6, 0, 6});
 	    
 	    //renderer.setMargins(new int[] { 20, 30, 15, 0 });
@@ -110,6 +115,10 @@ public class ChartFragment extends Fragment {
 	    renderer.setYLabels(0);
 	    renderer.setDisplayChartValues(false);
 	    renderer.setShowGrid(false);
+	    renderer.setShowLegend(false);
+	    renderer.setShowLabels(true);
+	    
+	    //renderer.setZoomEnabled(false, false);
 	    
 	    GraphicalView chartView;
 		/*if (chartView != null) {
@@ -119,9 +128,30 @@ public class ChartFragment extends Fragment {
 			chartView = ChartFactory.getBubbleChartView(getActivity(), series, renderer);
 		//}
 		
-	    LinearLayout layout = (LinearLayout) getActivity().findViewById(R.id.dashboard_chart_layout);
-	    layout.removeAllViews();
+		
+	    LinearLayout layout = (LinearLayout) getActivity().findViewById(R.id.dashboard_chart_layout);	    
+	    //layout.removeAllViews();
 	    layout.addView(chartView, new LayoutParams(960,
 	              LayoutParams.FILL_PARENT));
+	}
+
+	public void cleanUpAfterTaskExecution() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void awsClientException(AmazonClientException exception) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void awsServerException(AmazonServiceException exception) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void dataRetrieved(List<Datapoint> data) {
+		// TODO Auto-generated method stub
+		
 	}
 }

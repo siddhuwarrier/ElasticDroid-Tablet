@@ -4,21 +4,14 @@ xmlns:android="http://schemas.android.com/apk/res/android"
 android:orientation="vertical"
 android:layout_width="fill_parent"
 android:layout_height="fill_parent"
->
- 	<TextView
-        android:id="@+id/loginTextView"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:textSize="36.75sp"
-        android:paddingTop="10.25sp"
-        android:paddingBottom = "24.5sp"
-        android:textColor="#E47911"
-        android:text="@string/regions_msg"/>
-        
+>       
 	<ListView android:id="@id/android:list"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
 		android:layout_weight="1"
 		android:drawSelectorOnTop="false"
+		android:background="#F2F2F2"
+		android:dividerHeight="1.5sp"
+		android:divider="#F2F2F2"
 	/>
 </LinearLayout>
