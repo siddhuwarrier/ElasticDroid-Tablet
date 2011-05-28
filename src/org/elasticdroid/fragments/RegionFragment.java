@@ -1,7 +1,6 @@
 package org.elasticdroid.fragments;
 
-import java.util.Arrays;
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -18,6 +17,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.amazonaws.AmazonClientException;
@@ -35,7 +35,7 @@ public class RegionFragment extends ListFragment implements RetrieveRegionCallba
 	private RetrieveRegionTask retrieveRegionTask;
 	
 	/** the available AWS regions */
-	private HashMap<String, String> regionData;
+	private Map<String, String[]> regionData;
 	
 	private static final String TAG = RegionFragment.class.getName();
 	
@@ -57,11 +57,6 @@ public class RegionFragment extends ListFragment implements RetrieveRegionCallba
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-        
-		setListAdapter(new RegionsAdapter(
-				getActivity(), 
-				R.layout.regionrow, 
-				Arrays.asList(new String[]{"EU West", "US East", "US West", "AP Northeast"})));
 	}
 	
 	@Override
@@ -98,7 +93,30 @@ public class RegionFragment extends ListFragment implements RetrieveRegionCallba
 	public void regionsRetrieved(Map<String, String[]> regions) {
 		// TODO Auto-generated method stub
 		Log.d(TAG, "Regions retrieved!");
+		regionData = regions;
+
+		List<String> regionHumanNames = new ArrayList<String>();
+		for (String regionApiName : regionData.keySet()) {
+			regionHumanNames.add(regions.get(regionApiName)[0]);
+		}
+		
+		setListAdapter(new RegionsAdapter(
+				getActivity(), 
+				android.R.layout.simple_list_item_1, 
+				regionHumanNames));
 	}
+	
+    @Override
+	public void onListItemClick(ListView l, View v, int position, long id) {
+    	int mapIdx = 0;
+    	for (String regionDatum : regionData.keySet()) {
+    		if (mapIdx == position) {
+    			Log.d(TAG, regionDatum + " selected.");
+
+    			break;
+    		}
+    	}
+    }
 }
 
 /**
@@ -159,7 +177,7 @@ class RegionsAdapter extends ArrayAdapter<String>{
 	@Override
     public boolean areAllItemsEnabled() 
     { 
-            return false; 
+            return true; 
     } 
     
     /**
@@ -170,6 +188,6 @@ class RegionsAdapter extends ArrayAdapter<String>{
 	@Override
     public boolean isEnabled(int position) 
     { 
-            return false; 
+            return true; 
     } 
 }

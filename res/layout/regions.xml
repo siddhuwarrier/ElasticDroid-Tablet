@@ -20,7 +20,5 @@ android:layout_height="fill_parent"
 		android:layout_height="match_parent"
 		android:layout_weight="1"
 		android:drawSelectorOnTop="false"
-		android:divider="#FFFFFF"
-		android:dividerHeight="10sp"
 	/>
 </LinearLayout>

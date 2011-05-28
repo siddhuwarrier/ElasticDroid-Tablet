@@ -101,11 +101,18 @@ public class RetrieveRegionTask extends GenericTask<Void, Void, RegionReturnMode
 			Map<String, String[]> regionData = new HashMap<String, String[]>();
 			String regionApiName, regionHumanName;
 			
+			String[] temp;
 			for (Region region : returnModel.getRegions()) {
 				
 				regionApiName = region.getRegionName();
-				regionHumanName = regionApiName.replace("-", " ");
-				regionHumanName = regionApiName.replace("-\\d", ""); //remove thet railing number
+				temp = regionApiName.split("-");
+				temp[0] = temp[0].toUpperCase();
+				regionHumanName = "";
+				for (int idx = 0; idx < temp.length -1; idx ++) {
+					regionHumanName += temp[idx] + " ";
+				}
+				
+				regionHumanName = regionHumanName.substring(0, regionHumanName.length() - 1);
 				
 				Log.d(TAG, "Region Human Name: "  + regionHumanName);
 				regionData.put(regionApiName, new String[]{regionHumanName, region.getEndpoint()});
